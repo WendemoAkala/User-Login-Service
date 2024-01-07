@@ -1,12 +1,46 @@
 package com.userLogin.model;
 
 public class CustomUserRequest {
+    private String firstName;
+
+    private String lastName;
+
+    private String email;
+
+    private String phone;
+
+    private String address;
     private String username;
     private String password;
 
-    public CustomUserRequest(String username, String password) {
+    public CustomUserRequest(String firstName, String lastName, String email, String phone, String address, String username, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
         this.username = username;
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public String getUsername() {
@@ -15,6 +49,26 @@ public class CustomUserRequest {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setUsername(String username) {
@@ -28,6 +82,11 @@ public class CustomUserRequest {
     public CustomUser toCustomUser(){
         return new CustomUser(
                 null,
+                this.firstName,
+                this.lastName,
+                this.email,
+                this.phone,
+                this.address,
                 this.username,
                 this.password,
                 "",
