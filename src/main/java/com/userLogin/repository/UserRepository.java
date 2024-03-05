@@ -6,17 +6,16 @@ import com.userLogin.model.CustomUserRequest;
 import java.util.Optional;
 
 public interface UserRepository{
-    void createUser(CustomUser customUser);
+    Long createUser(CustomUser customUser);
+
     CustomUser findUserByUsername(String username);
 
-    void deleteById(Long Id);
 
-    CustomUser save(CustomUser customUser);
+    Long deleteUser(CustomUser customUser);
 
-    CustomUser findByUsername(String username);
+    Object findByUsername(String username);
 
-    Optional<Object> findById(Long userId);
+    Long updateUser(CustomUser customUser);
 
-
-    void deleteUser(CustomUser customUser);
+    Optional<Object> findById(Long id);
 }

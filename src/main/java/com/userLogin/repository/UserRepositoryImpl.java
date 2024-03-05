@@ -1,7 +1,6 @@
 package com.userLogin.repository;
 
 import com.userLogin.model.CustomUser;
-import com.userLogin.model.CustomUserResponse;
 import com.userLogin.repository.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,13 +17,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void createUser(CustomUser customUser) {
-        String sql = "INSERT INTO " + USER_TABLE_NAME + " (firstname,lastname, email, phone, address,username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public Long createUser(CustomUser customUser) {
+        String sql = "INSERT INTO " + USER_TABLE_NAME + " (firstName,lastName, email, phone, address,username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, customUser.getFirstName(), customUser.getLastName(), customUser.getEmail(), customUser.getPhone(),
                 customUser.getAddress(),customUser.getUsername(), customUser.getPassword());
-//        return jdbcTemplate.queryForObject("SELECT LAST_INSERTED_ID()",Long.class);
+        return null;
     }
-
+ 
     @Override
     public CustomUser findUserByUsername(String username) {
         String sql = "SELECT * FROM " + USER_TABLE_NAME + " WHERE username=?";
@@ -36,36 +35,29 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void deleteById(Long userId) {
-        String sql = "DELETE " + USER_TABLE_NAME + " WHERE id=?";
-        jdbcTemplate.update(sql, userId);
-    }
-
-    @Override
-    public CustomUser save(CustomUser customUser) {
-        return null;
-    }
-
-    @Override
-    public CustomUser findByUsername(String username) {
-        return null;
-    }
-
-    @Override
-    public Optional<Object> findById(Long userId) {
-        return Optional.empty();
-    }
-
-
-
-    @Override
-    public void deleteUser(CustomUser customUser) {
-
-    }
-    public void updateUser(CustomUser customUser){
-        String sql = "UPDATE " + USER_TABLE_NAME + " firstname=?,lastname=?, email=?, phone=?, address=?,username=?, password=?  WHERE id=?";
+    public Long deleteUser(CustomUser customUser) {
+        String sql = "DELETE " + USER_TABLE_NAME + " (firstName,lastName, email, phone, address,username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, customUser.getFirstName(), customUser.getLastName(), customUser.getEmail(), customUser.getPhone(),
                 customUser.getAddress(),customUser.getUsername(), customUser.getPassword());
+        return  null;
+    }
+
+    @Override
+    public Object findByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public Long updateUser(CustomUser customUser){
+        String sql = "UPDATE " + USER_TABLE_NAME + " firstName=?,lastName=?, email=?, phone=?, address=?,username=?, password=?  WHERE id=?";
+        jdbcTemplate.update(sql, customUser.getFirstName(), customUser.getLastName(), customUser.getEmail(), customUser.getPhone(),
+                customUser.getAddress(),customUser.getUsername(), customUser.getPassword());
+        return null;
+    }
+
+    @Override
+    public Optional<Object> findById(Long id) {
+        return Optional.empty();
     }
 }
 

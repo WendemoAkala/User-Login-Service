@@ -3,6 +3,7 @@ package com.userLogin.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 public class ItemResponse {
     @Id
@@ -59,12 +60,5 @@ public class ItemResponse {
 
     public void setStockCount(int stockCount) {
         this.stockCount = stockCount;
-    }
-
-    public int getStock() {
-        return 1;
-    }
-
-    public void setStock(int i) {
     }
 }

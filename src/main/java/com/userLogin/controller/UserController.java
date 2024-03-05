@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
+    private UserService userService ;
+//    @Autowired
+//    private UserRepository;
 
     @PostMapping("/create")
     @CrossOrigin
@@ -36,7 +36,7 @@ public class UserController {
         // Implement user registration logic
         // Check if the username or email is not already taken
         // Encrypt the password before saving
-        return userRepository.save(customUser);
+        return userService.save(customUser);
     }
 
     @PostMapping("/login")
@@ -44,16 +44,14 @@ public class UserController {
         // Implement user login logic
         // Check if the username and password match
         // Return user details if successful
-        return userRepository.findByUsername(loginRequest.getUsername());
+        return userService.findByUsername(loginRequest.getUsername());
     }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-        try {
+    public Long deleteUser(@RequestParam CustomUser customUser) throws Exception {
 //            userService.deleteUser(id);
-            userRepository.deleteById(id);
-            return ResponseEntity.ok("User deleted successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting user");
-        }
+          userService.deleteUser(customUser);
+          return null;
     }
+
 }

@@ -9,10 +9,11 @@ public class OrderResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Id
     @ManyToOne
     private Long userId;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> items;
+    private List<Item> item;
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
     private String shippingAddress;
@@ -20,15 +21,17 @@ public class OrderResponse {
     private  OrderStatus status;
 
 
+    public OrderResponse (){
+    }
 
-    public OrderResponse (Long id, Long userId, Date orderDate, String shippingAddress, double totalPrice, OrderStatus status) {
+    public OrderResponse(Long id, Long userId, List<Item> item, Date orderDate, String shippingAddress, double totalPrice, OrderStatus status) {
         this.id = id;
         this.userId = userId;
+        this.item = item;
         this.orderDate = orderDate;
         this.shippingAddress = shippingAddress;
         this.totalPrice = totalPrice;
         this.status = status;
-
     }
 
     public Long getId() {
@@ -39,21 +42,20 @@ public class OrderResponse {
         this.id = id;
     }
 
-
     public Long getUserId() {
         return userId;
     }
 
-    public void setUser(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public List<OrderItem> getItems() {
-        return items;
+    public List<Item> getItem() {
+        return item;
     }
 
-    public void setItems(List<OrderItem> items) {
-        this.items = items;
+    public void setItem(List<Item> items) {
+        this.item = item;
     }
 
     public Date getOrderDate() {
@@ -64,14 +66,6 @@ public class OrderResponse {
         this.orderDate = orderDate;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
-
     public String getShippingAddress() {
         return shippingAddress;
     }
@@ -80,22 +74,19 @@ public class OrderResponse {
         this.shippingAddress = shippingAddress;
     }
 
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String orderStatus) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
-    }
-
-
-
-    public Object getDate() {
-        return null;
-    }
-
-    public Object getTotalPrice() {
-        return null;
     }
 }

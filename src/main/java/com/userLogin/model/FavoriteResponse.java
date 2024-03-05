@@ -1,39 +1,51 @@
 package com.userLogin.model;
 
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 public class FavoriteResponse {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
-    private CustomUser customUser;
+    private Long userId;
+    private List<Item> item;
 
-    @ManyToOne
-    private Item item;
-
-    public FavoriteResponse (CustomUser customUser, Item item) {
-        this.customUser = customUser;
+    public FavoriteResponse(Long id, Long userId, List<Item> item) {
+        this.id = id;
+        this.userId = userId;
         this.item = item;
     }
 
-    public CustomUser getCustomUser() {
-        return customUser;
+    public Long getId() {
+        return id;
     }
 
-    public void setCustomUser(CustomUser customUser) {
-        this.customUser = customUser;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Item getItem() {
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public List<Item> getItem() {
         return item;
     }
 
-    public void setItem(Item item) {
+    public void setItem(List<Item> item) {
         this.item = item;
     }
+
     public  Favorite toFavorite()
     {
         return new Favorite(
-                null,
-                this.customUser,
+                (Long) null,
+                this.userId,
                 this.item
         );
     }
